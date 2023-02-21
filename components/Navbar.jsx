@@ -94,10 +94,13 @@ export default function Example() {
                 {/* code that will redirect to search query result with form tag */}
                 {/* <form action={`/search/${search}`} method="get"> */}
                 <Fragment>
-                    <Dialog open={open} handler={handleOpen}>
+                    <Dialog open={open} size={"xl"} handler={handleOpen}>
+                        {/* if screen size is large so it will display small generate code */}
                         <DialogHeader>Enter A Title</DialogHeader>
                         <DialogBody divider>
-                            <Input variant="standard" label="Search" onChange={(e) => setSearch(e.target.value)} value={search} />
+                            <div className="w-auto">
+                                <Input variant="standard" label="Search" onChange={(e) => setSearch(e.target.value)} value={search} />
+                            </div>
                         </DialogBody>
                         <DialogFooter>
                             <Button
@@ -109,7 +112,7 @@ export default function Example() {
                                 <span>Cancel</span>
                             </Button>
                             <Link href={`/search/${search}`}>
-                                <Button variant="gradient" type="submit" color="green" onClick={handleOpen}>
+                                <Button variant="gradient" className="bg-black" type="submit" color="green" onClick={handleOpen}>
                                     <span>Confirm</span>
                                 </Button>
                             </Link>
@@ -159,7 +162,7 @@ export default function Example() {
                 <div className="container mx-auto">
                     {navList}
                     {/* <Link href="https://newsapi.org/" target={"_blank"}> */}
-                    <Button variant="gradient" onClick={handleOpen} size="sm" className="mb-2">
+                    <Button variant="filled" onClick={handleOpen} size="sm" className="mb-2 bg-black">
                         <span>Search</span>
                     </Button>
                     {/* </Link> */}
