@@ -18,8 +18,22 @@ export default function Home() {
       </Head>
       <>
         {/* <Navbar /> */}
-        <div className="m-auto">
-          <NewsSec />
+        <div className="grid grid-cols-1 bg-gray-100 md:grid-cols-2 gap-10">
+          <div className="flex flex-col justify-center items-center p-20">
+            <h1 className="text-4xl font-bold text-center">
+              Welcome to Fenil News
+            </h1>
+            <p className="text-2xl text-center mt-5">
+              Get the latest news from all over the world
+            </p>
+            <p className="text-2xl text-center mt-5">
+              Just select the topic you want to read about
+            </p>
+
+          </div>
+          <div className="flex justify-center items-center">
+            <img src="/logo.jpg" alt="news" className='p-20 h-4/5' />
+          </div>
         </div>
       </>
     </>
