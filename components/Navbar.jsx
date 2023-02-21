@@ -1,14 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import {
     Navbar,
     MobileNav,
     Typography,
     Button,
     IconButton,
+    Input,
+    DialogFooter,
+    DialogBody,
+    DialogHeader,
+    Dialog,
 } from "@material-tailwind/react";
+import Link from "next/link";
 
 export default function Example() {
     const [openNav, setOpenNav] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [search, setSearch] = useState("");
+
+    const handleOpen = () => setOpen(!open);
+
 
     useEffect(() => {
         window.addEventListener(
@@ -25,9 +36,9 @@ export default function Example() {
                 color="blue-gray"
                 className="transition-all ease-in duration-200 focus:bg-gray-400 hover:bg-gray-100 p-4 rounded-md font-normal text-black"
             >
-                <a href="#" className="flex items-center">
-                    Pages
-                </a>
+                <Link href="/tesla" className="flex items-center">
+                    Tesla
+                </Link>
             </Typography>
             <Typography
                 as="li"
@@ -35,9 +46,9 @@ export default function Example() {
                 color="blue-gray"
                 className="p-4 rounded-md transition-all ease-in duration-200 focus:bg-gray-400 hover:bg-gray-100 font-normal text-black"
             >
-                <a href="#" className="flex items-center">
-                    Account
-                </a>
+                <Link href="machine-learning" className="flex items-center">
+                    Machine Learning
+                </Link>
             </Typography>
             <Typography
                 as="li"
@@ -45,9 +56,9 @@ export default function Example() {
                 color="blue-gray"
                 className="p-4 rounded-md transition-all ease-in duration-200 focus:bg-gray-400 hover:bg-gray-100 font-normal text-black"
             >
-                <a href="#" className="flex items-center">
-                    Blocks
-                </a>
+                <Link href="/india" className="flex items-center">
+                    India
+                </Link>
             </Typography>
             <Typography
                 as="li"
@@ -55,9 +66,9 @@ export default function Example() {
                 color="blue-gray"
                 className="p-4 rounded-md transition-all ease-in duration-200 focus:bg-gray-400 hover:bg-gray-100 font-normal text-black"
             >
-                <a href="#" className="flex items-center">
-                    Docs
-                </a>
+                <Link href="/usa" className="flex items-center">
+                    USA
+                </Link>
             </Typography>
         </ul>
     );
@@ -69,14 +80,43 @@ export default function Example() {
                     as="a"
                     href="#"
                     variant="small"
-                    className="mr-4 cursor-pointer py-1.5 font-normal"
+                    className="mr-4 cursor-pointer py-1.5 font-normal flex gap-3"
                 >
-                    <span className="text-black font-bold text-2xl">My News</span>
+                    <img src="/logo.png" alt="logo" className="h-8 w-8" />
+                    <span className="text-black font-bold text-2xl">FSG News</span>
                 </Typography>
                 <div className="hidden lg:block">{navList}</div>
-                <Button variant="gradient" className="hidden lg:inline-block">
-                    <span>Fenil Sonani</span>
+                {/* <Link href="https://newsapi.org/" target={"_blank"}> */}
+                <Button variant="gradient" onClick={handleOpen} className="hidden lg:inline-block">
+                    <span>Search</span>
                 </Button>
+                {/* </Link> */}
+                {/* code that will redirect to search query result with form tag */}
+                {/* <form action={`/search/${search}`} method="get"> */}
+                <Fragment>
+                    <Dialog open={open} handler={handleOpen}>
+                        <DialogHeader>Enter A Title</DialogHeader>
+                        <DialogBody divider>
+                            <Input variant="standard" label="Search" onChange={(e) => setSearch(e.target.value)} value={search} />
+                        </DialogBody>
+                        <DialogFooter>
+                            <Button
+                                variant="text"
+                                color="red"
+                                onClick={handleOpen}
+                                className="mr-1"
+                            >
+                                <span>Cancel</span>
+                            </Button>
+                            <Link href={`/search/${search}`}>
+                                <Button variant="gradient" type="submit" color="green" onClick={handleOpen}>
+                                    <span>Confirm</span>
+                                </Button>
+                            </Link>
+                        </DialogFooter>
+                    </Dialog>
+                </Fragment>
+                {/* </form> */}
                 <IconButton
                     variant="text"
                     className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -118,9 +158,11 @@ export default function Example() {
             <MobileNav open={openNav}>
                 <div className="container mx-auto">
                     {navList}
-                    <Button variant="gradient" size="sm" className="mb-2">
-                        <span>Fenil Sonani</span>
+                    {/* <Link href="https://newsapi.org/" target={"_blank"}> */}
+                    <Button variant="gradient" onClick={handleOpen} size="sm" className="mb-2">
+                        <span>Search</span>
                     </Button>
+                    {/* </Link> */}
                 </div>
             </MobileNav>
         </Navbar>
